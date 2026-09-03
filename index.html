@@ -58,9 +58,10 @@
     /* ===== ヒーロー画像の「上部のナビ帯」だけをCSSで隠す =====
        margin-top のマイナス％は画像の横幅を基準にするので、
        どの画面幅でも同じ割合(=ナビ帯の高さ)だけキレイに隠れます */
+    /* ヒーローは .wrap の外に出して全幅(full-bleed)表示。ナビ帯は画像側で除去済み */
     .hero-clip{ overflow:hidden; line-height:0; }
     .hero-clip picture{ display:block; }
-    .hero-clip img{ width:100%; height:auto; display:block; margin-top:-5.9%; }  /* PC:横長画像の上部ナビ帯を隠す */
+    .hero-clip img{ width:100%; height:auto; display:block; }
 
     /* ===== 「VOICE 卒業生の声」見出し画像（小さいので中央に少し小さめで） ===== */
     .voice-head{ display:block; width:70%; max-width:420px; height:auto; margin:56px auto 24px; }
@@ -183,16 +184,16 @@
     </div>
   </header>
 
-  <!-- ============ 画像でできたメイン部分 ============ -->
-  <div class="wrap" id="top">
+  <!-- ① ファーストビュー：PCは全幅表示／スマホは縦長 hero-sp.jpg に自動切替 -->
+  <div class="hero-clip" id="top">
+    <picture>
+      <source media="(max-width:720px)" srcset="images/hero-sp.jpg">
+      <img src="images/hero.jpg" alt="会社に依存しない働き方を、自分の力で。フリサポ｜完全伴走型のフリーランス育成スクール">
+    </picture>
+  </div>
 
-    <!-- ① ファーストビュー（PC=横長 hero.png ／ スマホ=縦長 hero-sp.jpg を自動切替。上部のロゴ/ナビ帯はCSSで隠す） -->
-    <div class="hero-clip">
-      <picture>
-        <source media="(max-width:720px)" srcset="images/hero-sp.jpg">
-        <img src="images/hero.jpg" alt="会社に依存しない働き方を、自分の力で。フリサポ｜完全伴走型のフリーランス育成スクール">
-      </picture>
-    </div>
+  <!-- ============ 中央800px帯のメイン部分 ============ -->
+  <div class="wrap">
 
     <!-- ② ABOUT フリサポとは -->
     <img class="sec" id="about" src="images/about.png" alt="フリサポとは｜自分らしい働き方を目指す完全伴走型のフリーランス育成スクール">
