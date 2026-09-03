@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  フリサポ（freesupo）公式LP  ※第2版：ドライブの画像をそのまま挿入
+  ・ドライブの完成デザイン画像9枚を、中央寄せ1カラム(最大800px)で配置
+  ・PCでは中央にまとまり、スマホでは画面幅ぴったりで崩れない設計
+  ・画像が無いセクション（SUPPORT/COACH/FAQ/最終CTA）は「仮」でHTML作成
+  ・画像は images/ フォルダに保存済み
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フリサポ｜完全伴走型のフリーランス育成スクール</title>
+  <meta name="description" content="会社に依存しない働き方を、自分の力で。SNS運用・動画編集・AI活用・物販から、あなたに合ったスキルを個別に伴走するフリーランス育成スクール『フリサポ』。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== 色などの基本設定 ===== */
+    :root{
+      --navy:#14346b; --blue:#2f6fed; --blue-deep:#1e50c9;
+      --sky:#eaf1ff; --sky-2:#f4f8ff; --orange:#f26a2e; --orange-d:#e05a1f;
+      --ink:#2b3446; --ink-soft:#5b6472; --line:#e5eaf2;
+      --radius:16px; --shadow:0 10px 30px rgba(20,52,107,.08);
+      --colw:800px;   /* ★中央カラムの最大幅。ここを変えると全体の幅が変わります */
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; scroll-padding-top:62px; } /* 固定ヘッダー分だけ上に余白 */
+    body{
+      font-family:"Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;
+      color:var(--ink); line-height:1.8; background:#fff;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    /* ★中央寄せの1カラム。画像はこの中に縦に並ぶ */
+    .wrap{ max-width:var(--colw); margin:0 auto; }
+    /* 大きなセクション画像：カラム幅ぴったりに。すき間が出ないよう block 指定 */
+    .wrap > img.sec{ width:100%; height:auto; display:block; }
+
+    /* ===== ヘッダー（上に固定される本物のナビ。スマホでも崩れない） ===== */
+    header{ position:sticky; top:0; z-index:100; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+    .nav{ max-width:var(--colw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 16px; }
+    .logo{ display:flex; align-items:center; }
+    .logo img{ height:44px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像 */
+    .nav__menu{ display:flex; align-items:center; gap:18px; }
+    .nav__menu a{ font-size:12px; font-weight:500; color:var(--ink); }
+    .nav__menu a small{ display:block; font-size:9px; color:var(--ink-soft); text-align:center; margin-top:2px; }
+    .nav__menu a:hover{ color:var(--blue); }
+    .nav__cta{ background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff !important; padding:9px 15px; border-radius:999px; font-weight:700 !important; box-shadow:0 6px 14px rgba(242,106,46,.3); }
+    .nav__toggle{ display:none; background:none; border:0; cursor:pointer; padding:8px; }
+    .nav__toggle span{ display:block; width:22px; height:2px; background:var(--navy); margin:5px 0; transition:.3s; }
+
+    /* ===== ヒーロー画像の「上部のナビ帯」だけをCSSで隠す =====
+       margin-top のマイナス％は画像の横幅を基準にするので、
+       どの画面幅でも同じ割合(=ナビ帯の高さ)だけキレイに隠れます */
+    .hero-clip{ overflow:hidden; line-height:0; }
+    .hero-clip img{ width:100%; height:auto; display:block; margin-top:-5.9%; }
+
+    /* ===== 「VOICE 卒業生の声」見出し画像（小さいので中央に少し小さめで） ===== */
+    .voice-head{ display:block; width:70%; max-width:420px; height:auto; margin:56px auto 24px; }
+
+    /* ===== 体験談カード：矢印・ドットで1枚ずつ切り替えるカルーセル ===== */
+    .voice-carousel{ position:relative; padding:0 6px 4px; }
+    .vc-viewport{ overflow:hidden; }                         /* 見える窓（1枚分） */
+    .vc-track{ display:flex; transition:transform .4s ease; } /* 中身を横にスライド */
+    .vc-slide{ flex:0 0 100%; display:flex; justify-content:center; padding:4px 6px 8px; }
+    .vc-slide img{ width:100%; max-width:330px; height:auto; display:block; border-radius:12px; }
+    /* 左右の矢印ボタン */
+    .vc-arrow{
+      position:absolute; top:44%; transform:translateY(-50%); z-index:5;
+      width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+      background:#fff; color:var(--blue); font-size:24px; line-height:1; cursor:pointer;
+      box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center;
+    }
+    .vc-arrow:hover{ background:var(--sky); }
+    .vc-arrow:disabled{ opacity:.35; cursor:default; }
+    .vc-arrow.prev{ left:0; } .vc-arrow.next{ right:0; }
+    /* ドット（現在の位置） */
+    .vc-dots{ display:flex; gap:9px; justify-content:center; margin-top:10px; }
+    .vc-dot{ width:9px; height:9px; border-radius:50%; background:#c7d2e6; border:0; cursor:pointer; padding:0; transition:background .2s; }
+    .vc-dot.active{ background:var(--blue); }
+
+    /* ===== 仮セクション共通（画像が無い所をHTMLで作成） ===== */
+    .section{ padding:64px 20px; }
+    .section--sky{ background:var(--sky-2); }
+    .head{ text-align:center; margin-bottom:40px; }
+    .head__en{ display:block; color:var(--blue); font-weight:700; letter-spacing:.18em; font-size:13px; margin-bottom:8px; }
+    .head__jp{ font-size:clamp(22px,4vw,30px); font-weight:900; color:var(--navy); line-height:1.4; }
+    .head__lead{ margin-top:14px; color:var(--ink-soft); font-size:14px; }
+    .tag-karito{ display:inline-block; background:#ffe9d9; color:var(--orange-d); font-size:12px; font-weight:700; padding:2px 10px; border-radius:999px; margin-left:8px; vertical-align:middle; }
+
+    /* SUPPORT（仮） */
+    .support-grid{ display:grid; grid-template-columns:1fr; gap:16px; max-width:600px; margin:0 auto; }
+    .support-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow); }
+    .support-card h4{ color:var(--navy); font-size:18px; margin-bottom:8px; }
+    .support-card h4 .ac{ color:var(--blue); }
+    .support-card p{ font-size:14px; color:var(--ink-soft); }
+
+    /* COACH（仮） */
+    .coach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:720px; margin:0 auto; }
+    .coach-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; }
+    .coach-card .ph{ height:150px; background:linear-gradient(135deg,#dbe6fb,#c7d8f5); display:flex; align-items:center; justify-content:center; color:#7c93bd; font-size:12px; }
+    .coach-card .body{ padding:16px; }
+    .coach-card b{ color:var(--navy); font-size:16px; }
+    .coach-card .role{ color:var(--blue); font-size:12px; font-weight:700; margin:4px 0 8px; }
+    .coach-card p{ font-size:12px; color:var(--ink-soft); }
+
+    /* FAQ（仮） */
+    .faq{ max-width:680px; margin:0 auto; }
+    .faq-item{ background:#fff; border:1px solid var(--line); border-radius:12px; margin-bottom:12px; overflow:hidden; }
+    .faq-q{ display:flex; gap:12px; align-items:center; padding:16px 18px; cursor:pointer; font-weight:700; color:var(--navy); font-size:15px; }
+    .faq-q .qmark{ color:var(--blue); font-weight:900; }
+    .faq-q .plus{ margin-left:auto; color:var(--blue); font-size:20px; transition:transform .25s; }
+    .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+    .faq-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; padding:0 18px; color:var(--ink-soft); font-size:14px; }
+    .faq-item.open .faq-a{ max-height:260px; padding:0 18px 18px 42px; }
+
+    /* 最終CTA */
+    .last-cta{ background:linear-gradient(135deg,#14346b,#245bbd); color:#fff; text-align:center; padding:64px 20px; }
+    .last-cta h2{ font-size:clamp(20px,4vw,30px); font-weight:900; margin-bottom:12px; }
+    .last-cta p{ opacity:.9; margin-bottom:26px; font-size:15px; }
+    .btn-cta{ display:inline-flex; align-items:center; gap:8px; background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff; font-weight:700; font-size:16px; padding:15px 30px; border-radius:999px; box-shadow:0 8px 20px rgba(242,106,46,.35); transition:transform .15s, box-shadow .15s; }
+    .btn-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(242,106,46,.45); }
+
+    footer{ background:#0f2450; color:#c7d2e6; padding:40px 20px; text-align:center; }
+    footer .fnav{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+    footer .fnav a{ font-size:13px; } footer .fnav a:hover{ color:#fff; }
+    footer .copy{ font-size:12px; opacity:.7; }
+
+    /* ===== 画面下に追従する申し込みボタン ===== */
+    .float-cta{
+      position:fixed; z-index:50; right:20px; bottom:20px;
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff;
+      font-weight:700; font-size:15px; padding:14px 24px; border-radius:999px;
+      box-shadow:0 10px 26px rgba(242,106,46,.45);
+    }
+    .float-cta:hover{ filter:brightness(1.05); }
+
+    /* ===== スマホ表示のとき ===== */
+    @media (max-width:720px){
+      /* ナビはハンバーガーメニューに切り替え */
+      .nav__menu{ display:none; position:absolute; top:60px; left:0; right:0; background:#fff; flex-direction:column; gap:0; padding:8px 0; border-bottom:1px solid var(--line); box-shadow:var(--shadow); }
+      .nav__menu.open{ display:flex; }
+      .nav__menu a{ padding:12px 22px; width:100%; }
+      .nav__menu a small{ display:inline; margin-left:6px; }
+      .nav__menu .nav__cta{ margin:8px 22px; text-align:center; }
+      .nav__toggle{ display:block; }
+
+      .voice-grid{ grid-template-columns:1fr; }   /* 体験談カードを縦1列に */
+      .coach-grid{ grid-template-columns:1fr; max-width:340px; }
+      .section{ padding:48px 16px; }
+      .voice-head{ width:78%; }
+      /* 追従ボタンは画面下いっぱいのバーに */
+      .float-cta{ right:12px; left:12px; bottom:12px; justify-content:center; font-size:16px; padding:16px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ ヘッダー（本物のナビ。PLANSは外し、CTAは統一） ============ -->
+  <header>
+    <div class="nav">
+      <a href="#top" class="logo"><img src="images/logo.png" alt="フリサポ freesupo."></a>
+      <nav class="nav__menu" id="navMenu">
+        <a href="#about">ABOUT<small>フリサポとは</small></a>
+        <a href="#voice">VOICE<small>受講生の声</small></a>
+        <a href="#faq">FAQ<small>よくある質問</small></a>
+        <a href="#cta" class="nav__cta">無料ロードマップ作成会</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ============ 画像でできたメイン部分 ============ -->
+  <div class="wrap" id="top">
+
+    <!-- ① ファーストビュー（画像の上部ナビ帯はCSSで隠している） -->
+    <div class="hero-clip">
+      <img src="images/hero.png" alt="会社に依存しない働き方を、自分の力で。フリサポ｜完全伴走型のフリーランス育成スクール">
+    </div>
+
+    <!-- ② ABOUT フリサポとは -->
+    <img class="sec" id="about" src="images/about.png" alt="フリサポとは｜自分らしい働き方を目指す完全伴走型のフリーランス育成スクール">
+
+    <!-- ③ よくあるスクールとの違い（不安の提示） -->
+    <img class="sec" src="images/worry.png" alt="スクール選びで、こんな不安はありませんか？">
+
+    <!-- ④ フリサポなら（学べるスキル＋個別伴走） -->
+    <img class="sec" src="images/feature.png" alt="フリサポなら｜SNS運用・物販・生成AI活用・動画編集の中から、あなたに合った分野を個別に伴走">
+
+    <!-- ⑥ VOICE 見出し画像 -->
+    <img class="voice-head" src="images/voice-head.png" alt="VOICE 卒業生の声" id="voice">
+
+    <!-- ⑦ 体験談カード：横スクロールのカルーセル（1枚ずつ・矢印＆ドット付き） -->
+    <div class="voice-carousel">
+      <button class="vc-arrow prev" id="vcPrev" aria-label="前へ">‹</button>
+      <div class="vc-viewport">
+        <div class="vc-track" id="vcTrack">
+          <div class="vc-slide"><img src="images/voice-sns.png"    alt="SNS運用に挑戦したKさん（25歳）の体験談"></div>
+          <div class="vc-slide"><img src="images/voice-movie.png"  alt="動画編集に挑戦したTさん（33歳）の体験談"></div>
+          <div class="vc-slide"><img src="images/voice-ai.png"     alt="AI活用に挑戦したTさん（45歳）の体験談"></div>
+          <div class="vc-slide"><img src="images/voice-buppan.png" alt="物販に挑戦したTさん（41歳）の体験談"></div>
+        </div>
+      </div>
+      <button class="vc-arrow next" id="vcNext" aria-label="次へ">›</button>
+      <div class="vc-dots" id="vcDots"></div>
+    </div>
+
+    <!-- ⑨ FAQ ※仮 -->
+    <section class="section" id="faq">
+      <div class="head">
+        <span class="head__en">FAQ</span>
+        <h2 class="head__jp">よくある質問<span class="tag-karito">仮</span></h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><div class="faq-q"><span class="qmark">Q.</span>現在仕事が忙しいのですが、両立できますか？<span class="plus">＋</span></div><div class="faq-a">はい。あなたの生活リズムに合わせて学習計画を組むので、本業や家庭と両立しながら進められます。（※仮の回答）</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="qmark">Q.</span>パソコン操作に自信がないのですが、大丈夫でしょうか？<span class="plus">＋</span></div><div class="faq-a">基本的な操作から個別にサポートするので、初心者の方でも安心して始められます。（※仮の回答）</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="qmark">Q.</span>全くの未経験・初心者でも大丈夫ですか？<span class="plus">＋</span></div><div class="faq-a">受講生の多くが未経験からのスタートです。ゼロからの伴走を前提に設計しています。（※仮の回答）</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="qmark">Q.</span>どのスキルが自分に合うか分からないのですが？<span class="plus">＋</span></div><div class="faq-a">無料ロードマップ作成会で、あなたの経験や目標をヒアリングし、最適な分野をご提案します。（※仮の回答）</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="qmark">Q.</span>無料相談を受けたら、必ず入会しなければいけませんか？<span class="plus">＋</span></div><div class="faq-a">いいえ。無理な勧誘は行いません。まずは気軽にご相談ください。（※仮の回答）</div></div>
+      </div>
+    </section>
+
+    <!-- ⑨.5 無料相談の流れ（追加画像：FLOW／LINE友だち追加→4タイプ診断→日時選択→無料相談） -->
+    <img class="sec" src="images/flow.png" alt="無料相談の流れ｜①LINEで友だち追加 ②4タイプ診断に回答 ③希望日時を選択 ④オンライン無料相談" style="margin-top:32px;">
+
+    <!-- ⑨.9 想い・メッセージ（追加画像：将来の働き方を見直し…）※最後に配置 -->
+    <img class="sec" src="images/message.png" alt="将来の働き方を見直し、自分に合った一歩を選べる人生へ。" style="margin-top:32px;">
+
+  </div><!-- /.wrap -->
+
+  <!-- ⑩ 最終CTA（全幅） -->
+  <section class="last-cta" id="cta">
+    <h2>自分にぴったりの働き方が見つかる</h2>
+    <p>まずは無料で、あなた専用のロードマップを一緒に作りましょう。</p>
+    <a href="#" class="btn-cta">無料ロードマップ作成会に申し込む ›</a>
+    <!-- ↑ href="#" は仮。あとでLINE登録 or 申込フォームのURLを入れます -->
+  </section>
+
+  <footer>
+    <div class="fnav">
+      <a href="#">運営会社</a><a href="#">プライバシーポリシー</a><a href="#">特定商取引法に基づく表記</a>
+    </div>
+    <div class="copy">© freesupo（フリサポ） All Rights Reserved.</div>
+  </footer>
+
+  <!-- 画面下に追従する申し込みボタン -->
+  <a href="#cta" class="float-cta">無料ロードマップ作成会に申し込む ›</a>
+
+  <script>
+    // スマホのハンバーガーメニュー開閉
+    const navToggle = document.getElementById('navToggle');
+    const navMenu   = document.getElementById('navMenu');
+    navToggle.addEventListener('click', ()=> navMenu.classList.toggle('open'));
+    navMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navMenu.classList.remove('open')));
+
+    // FAQの開け閉め
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-q').addEventListener('click',()=>item.classList.toggle('open'));
+    });
+
+    // 卒業生の声カルーセル（矢印・ドットで1枚ずつ切り替え）
+    (function(){
+      const track = document.getElementById('vcTrack');
+      const slides = Array.from(track.children);
+      const dotsWrap = document.getElementById('vcDots');
+      const prev = document.getElementById('vcPrev');
+      const next = document.getElementById('vcNext');
+      let index = 0;
+      // ドットを人数分つくる
+      slides.forEach((_, i)=>{
+        const b = document.createElement('button');
+        b.className = 'vc-dot';
+        b.addEventListener('click', ()=> go(i));
+        dotsWrap.appendChild(b);
+      });
+      const dots = Array.from(dotsWrap.children);
+      // 指定の枚目に切り替え
+      function go(i){
+        index = Math.max(0, Math.min(slides.length-1, i));
+        track.style.transform = 'translateX(' + (-index*100) + '%)';
+        dots.forEach((d,j)=> d.classList.toggle('active', j===index));
+        prev.disabled = (index===0);
+        next.disabled = (index===slides.length-1);
+      }
+      prev.addEventListener('click', ()=> go(index-1));
+      next.addEventListener('click', ()=> go(index+1));
+      // スマホのスワイプ操作にも対応
+      let x0=null;
+      track.addEventListener('touchstart', e=>{ x0=e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', e=>{
+        if(x0===null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if(dx < -40) go(index+1); else if(dx > 40) go(index-1);
+        x0=null;
+      }, {passive:true});
+      go(0); // 初期表示
+    })();
+  </script>
+
+</body>
+</html>
