@@ -37,14 +37,14 @@
     }
     a{ color:inherit; text-decoration:none; }
 
-    /* ★中央寄せの1カラム。画像はこの中に縦に並ぶ */
-    .wrap{ max-width:var(--colw); margin:0 auto; }
+    /* ★セクションは全幅表示（左右の余白なし）。画像はこの中に縦に並ぶ */
+    .wrap{ max-width:none; margin:0 auto; }
     /* 大きなセクション画像：カラム幅ぴったりに。すき間が出ないよう block 指定 */
     .wrap > img.sec{ width:100%; height:auto; display:block; }
 
     /* ===== ヘッダー（上に固定される本物のナビ。スマホでも崩れない） ===== */
     header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); }
-    .nav{ max-width:var(--colw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 16px; }
+    .nav{ max-width:none; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 28px; }
     .logo{ display:flex; align-items:center; }
     .logo img{ height:44px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像 */
     .nav__menu{ display:flex; align-items:center; gap:18px; }
@@ -64,15 +64,15 @@
     .hero-clip img{ width:100%; height:auto; display:block; }
 
     /* ===== 「VOICE 卒業生の声」見出し画像（小さいので中央に少し小さめで） ===== */
-    .voice-head{ display:block; width:70%; max-width:420px; height:auto; margin:56px auto 24px; }
+    .voice-head{ display:block; width:70%; max-width:700px; height:auto; margin:56px auto 24px; }
 
     /* ===== 体験談カード：矢印・ドットで1枚ずつ切り替えるカルーセル ===== */
     /* PCで横に広がりすぎないよう、カード幅に合わせて中央に寄せる */
-    .voice-carousel{ position:relative; padding:0 52px 4px; max-width:460px; margin:0 auto; }
+    .voice-carousel{ position:relative; padding:0 56px 4px; max-width:720px; margin:0 auto; }
     .vc-viewport{ overflow:hidden; }                         /* 見える窓（1枚分） */
     .vc-track{ display:flex; transition:transform .4s ease; } /* 中身を横にスライド */
     .vc-slide{ flex:0 0 100%; display:flex; justify-content:center; padding:4px 6px 8px; }
-    .vc-slide img{ width:100%; max-width:330px; height:auto; display:block; border-radius:12px; }
+    .vc-slide img{ width:100%; max-width:460px; height:auto; display:block; border-radius:12px; }
     /* 左右の矢印ボタン */
     .vc-arrow{
       position:absolute; top:44%; transform:translateY(-50%); z-index:5;
