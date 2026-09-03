@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- フリサポ 特定商取引法に基づく表示（LPのトンマナに合わせたデザイン） -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特定商取引法に基づく表示｜フリサポ</title>
+  <meta name="description" content="フリサポ（運営：株式会社Retro）の特定商取引法に基づく表示。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#14346b; --blue:#2f6fed; --sky:#eaf1ff; --sky-2:#f4f8ff; --orange:#f26a2e;
+      --ink:#2b3446; --ink-soft:#5b6472; --line:#e5eaf2;
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:"Noto Sans JP","Hiragino Sans",Meiryo,sans-serif; color:var(--ink); line-height:1.9; background:var(--sky-2); -webkit-font-smoothing:antialiased; }
+    a{ color:var(--blue); }
+
+    header{ background:#fff; border-bottom:1px solid var(--line); }
+    .nav{ max-width:880px; margin:0 auto; height:70px; display:flex; align-items:center; padding:0 20px; }
+    .logo img{ height:56px; width:auto; display:block; }
+
+    main{ max-width:880px; margin:0 auto; padding:48px 20px 64px; }
+    .page-head{ text-align:center; margin-bottom:40px; }
+    .page-head .en{ display:block; color:var(--blue); font-weight:700; letter-spacing:.18em; font-size:13px; margin-bottom:8px; }
+    .page-head h1{ font-size:clamp(22px,4vw,30px); font-weight:900; color:var(--navy); }
+    .card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:clamp(20px,3vw,36px); box-shadow:0 10px 30px rgba(20,52,107,.06); }
+
+    /* 特商法テーブル */
+    .law-table{ width:100%; border-collapse:collapse; }
+    .law-table th, .law-table td{ text-align:left; vertical-align:top; padding:16px 14px; border-bottom:1px solid var(--line); font-size:15px; }
+    .law-table th{ width:34%; color:var(--navy); font-weight:700; background:var(--sky); border-radius:6px 0 0 6px; white-space:nowrap; }
+    .law-table td{ color:var(--ink); }
+    .law-table tr:last-child th, .law-table tr:last-child td{ border-bottom:0; }
+    .note{ color:var(--ink-soft); font-size:13px; margin-top:6px; }
+    .back{ display:inline-block; margin-top:36px; color:var(--blue); font-weight:700; font-size:14px; }
+
+    footer{ background:#0f2450; color:#c7d2e6; padding:40px 20px; text-align:center; }
+    footer .fnav{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+    footer .fnav a{ font-size:13px; color:#c7d2e6; text-decoration:none; }
+    footer .fnav a:hover{ color:#fff; }
+    footer .copy{ font-size:12px; opacity:.7; }
+
+    /* スマホ：テーブルを縦積み */
+    @media (max-width:600px){
+      .law-table, .law-table tbody, .law-table tr, .law-table th, .law-table td{ display:block; width:100%; }
+      .law-table th{ border-radius:6px; padding:12px 14px 6px; background:var(--sky); }
+      .law-table td{ padding:8px 14px 16px; border-bottom:1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav"><a href="index.html" class="logo"><img src="images/logo.png" alt="フリサポ"></a></div>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <span class="en">LEGAL</span>
+      <h1>特定商取引法に基づく表示</h1>
+    </div>
+
+    <div class="card">
+      <table class="law-table">
+        <tr><th>販売社名</th><td>株式会社Retro</td></tr>
+        <tr><th>運営統括責任者</th><td>三島 誠司</td></tr>
+        <tr><th>所在地</th><td>東京都千代田区神田三崎町3-4-4　グラン水道橋1F</td></tr>
+        <tr><th>電話番号</th><td>03-6261-5075</td></tr>
+        <tr><th>メールアドレス</th><td>info☆re-tro.net<div class="note">※迷惑メール対策のため「☆」で表記しております。お問合わせの際は「☆」を「@」に変更してご利用ください。</div></td></tr>
+        <tr><th>お支払い方法</th><td>クレジットカードにて決済</td></tr>
+        <tr><th>販売価格</th><td>商品申込ページに記載</td></tr>
+        <tr><th>商品代金以外の必要金額</th><td>なし</td></tr>
+        <tr><th>お申込み有効期限</th><td>14日以内にお願いいたします。14日間入金がない場合は、キャンセルとさせていただきます。</td></tr>
+        <tr><th>商品引渡し時期</th><td>初回のご入金確認後3営業日以内にご案内します。</td></tr>
+        <tr><th>商品引渡し方法</th><td>商品購入メールアドレスもしくはLINEへ配信</td></tr>
+        <tr><th>返品・不良品について</th><td>契約から8日以内のクーリングオフ適用期間を除き、お客様のご都合による返品および返金には応じられません。</td></tr>
+      </table>
+
+      <a href="index.html" class="back">← トップページに戻る</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="fnav">
+      <a href="https://re-tro.net/" target="_blank" rel="noopener">運営会社</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="law.html">特定商取引法に基づく表記</a>
+    </div>
+    <div class="copy">© freesupo（フリサポ） All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
