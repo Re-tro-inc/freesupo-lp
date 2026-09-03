@@ -29,7 +29,7 @@
       --colw:1200px;   /* ★中央カラムの最大幅(FVに合わせて拡大)。ヘッダーの中身も同じ幅 */
     }
     *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; scroll-padding-top:62px; } /* 固定ヘッダー分だけ上に余白 */
+    html{ scroll-behavior:smooth; scroll-padding-top:72px; } /* 固定ヘッダー分だけ上に余白 */
     body{
       font-family:"Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;
       color:var(--ink); line-height:1.8; background:#fff;
@@ -40,13 +40,14 @@
     /* ★セクションは全幅表示（左右の余白なし）。画像はこの中に縦に並ぶ */
     .wrap{ max-width:none; margin:0 auto; }
     /* 大きなセクション画像：カラム幅ぴったりに。すき間が出ないよう block 指定 */
-    .wrap > img.sec{ width:100%; height:auto; display:block; }
+    .wrap > img.sec, .wrap > picture.sec{ width:100%; height:auto; display:block; }
+    .wrap > picture.sec img{ width:100%; height:auto; display:block; }  /* PC/スマホ切替用pictureの中のimg */
 
     /* ===== ヘッダー（上に固定される本物のナビ。スマホでも崩れない） ===== */
     header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); }
-    .nav{ max-width:none; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 28px; }
+    .nav{ max-width:none; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:70px; padding:0 28px; }
     .logo{ display:flex; align-items:center; }
-    .logo img{ height:44px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像 */
+    .logo img{ height:58px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像(大きめ) */
     .nav__menu{ display:flex; align-items:center; gap:18px; }
     .nav__menu a{ font-size:12px; font-weight:500; color:var(--ink); }
     .nav__menu a small{ display:block; font-size:9px; color:var(--ink-soft); text-align:center; margin-top:2px; }
@@ -148,7 +149,7 @@
     /* ===== スマホ表示のとき ===== */
     @media (max-width:720px){
       /* ナビはハンバーガーメニューに切り替え */
-      .nav__menu{ display:none; position:absolute; top:60px; left:0; right:0; background:#fff; flex-direction:column; gap:0; padding:8px 0; border-bottom:1px solid var(--line); box-shadow:var(--shadow); }
+      .nav__menu{ display:none; position:absolute; top:70px; left:0; right:0; background:#fff; flex-direction:column; gap:0; padding:8px 0; border-bottom:1px solid var(--line); box-shadow:var(--shadow); }
       .nav__menu.open{ display:flex; }
       .nav__menu a{ padding:12px 22px; width:100%; }
       .nav__menu a small{ display:inline; margin-left:6px; }
@@ -176,7 +177,7 @@
       <a href="#top" class="logo"><img src="images/logo.png" alt="フリサポ freesupo."></a>
       <nav class="nav__menu" id="navMenu">
         <a href="#about">ABOUT<small>フリサポとは</small></a>
-        <a href="#voice">VOICE<small>受講生の声</small></a>
+        <a href="#voice">VOICE<small>卒業生の声</small></a>
         <a href="#faq">FAQ<small>よくある質問</small></a>
         <a href="#cta" class="nav__cta">無料ロードマップ作成会</a>
       </nav>
@@ -195,8 +196,11 @@
   <!-- ============ 中央800px帯のメイン部分 ============ -->
   <div class="wrap">
 
-    <!-- ② ABOUT フリサポとは -->
-    <img class="sec" id="about" src="images/about.png" alt="フリサポとは｜自分らしい働き方を目指す完全伴走型のフリーランス育成スクール">
+    <!-- ② ABOUT フリサポとは（PC=横長 about.png ／ スマホ=縦長 about-sp.jpg を自動切替） -->
+    <picture class="sec" id="about">
+      <source media="(max-width:720px)" srcset="images/about-sp.jpg">
+      <img src="images/about.png" alt="フリサポとは｜自分らしい働き方を目指す完全伴走型のフリーランス育成スクール">
+    </picture>
 
     <!-- ③ よくあるスクールとの違い（不安の提示） -->
     <img class="sec" src="images/worry.png" alt="スクール選びで、こんな不安はありませんか？">
