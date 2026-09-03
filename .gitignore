@@ -1,4 +1,5 @@
 # 公開に不要なもの
 .venv/
 _mobile-test.html
+images/_original/
 .DS_Store

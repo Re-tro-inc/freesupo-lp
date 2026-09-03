@@ -43,7 +43,7 @@
     .wrap > img.sec{ width:100%; height:auto; display:block; }
 
     /* ===== ヘッダー（上に固定される本物のナビ。スマホでも崩れない） ===== */
-    header{ position:sticky; top:0; z-index:100; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+    header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); }
     .nav{ max-width:var(--colw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 16px; }
     .logo{ display:flex; align-items:center; }
     .logo img{ height:44px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像 */
@@ -65,7 +65,8 @@
     .voice-head{ display:block; width:70%; max-width:420px; height:auto; margin:56px auto 24px; }
 
     /* ===== 体験談カード：矢印・ドットで1枚ずつ切り替えるカルーセル ===== */
-    .voice-carousel{ position:relative; padding:0 6px 4px; }
+    /* PCで横に広がりすぎないよう、カード幅に合わせて中央に寄せる */
+    .voice-carousel{ position:relative; padding:0 52px 4px; max-width:460px; margin:0 auto; }
     .vc-viewport{ overflow:hidden; }                         /* 見える窓（1枚分） */
     .vc-track{ display:flex; transition:transform .4s ease; } /* 中身を横にスライド */
     .vc-slide{ flex:0 0 100%; display:flex; justify-content:center; padding:4px 6px 8px; }
