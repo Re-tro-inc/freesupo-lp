@@ -75,9 +75,12 @@
        margin-top のマイナス％は画像の横幅を基準にするので、
        どの画面幅でも同じ割合(=ナビ帯の高さ)だけキレイに隠れます */
     /* ヒーローは .wrap の外に出して全幅(full-bleed)表示。ナビ帯は画像側で除去済み */
-    .hero-clip{ overflow:hidden; line-height:0; }
+    .hero-clip{ overflow:hidden; line-height:0; position:relative; }
     .hero-clip picture{ display:block; }
     .hero-clip img{ width:100%; height:auto; display:block; }
+    /* FV画像内のボタン位置に重ねる透明リンク（PC用の座標） */
+    .hero-cta{ position:absolute; display:block; z-index:5; cursor:pointer;
+      left:10.4%; top:82.5%; width:38%; height:14.5%; }
 
     /* ===== 「VOICE 卒業生の声」見出し画像（小さいので中央に少し小さめで） ===== */
     .voice-head{ display:block; width:70%; max-width:700px; height:auto; margin:10px auto 24px; } /* 上マージンを詰めて でもフリサポなら との空白を縮小 */
@@ -173,6 +176,8 @@
 
       /* スマホの縦長FVは、上部のロゴ部分（ヘッダーのロゴと重複）を隠す */
       .hero-clip img{ margin-top:-25%; }
+      /* スマホ版FVのボタン位置に合わせて透明リンクを再配置 */
+      .hero-cta{ left:4%; top:67.5%; width:74%; height:9.5%; }
 
       .voice-grid{ grid-template-columns:1fr; }   /* 体験談カードを縦1列に */
       .coach-grid{ grid-template-columns:1fr; max-width:340px; }
@@ -206,6 +211,7 @@
       <source media="(max-width:720px)" srcset="images/hero-sp.jpg">
       <img src="images/hero.jpg" alt="会社に依存しない働き方を、自分の力で。フリサポ｜完全伴走型のフリーランス育成スクール">
     </picture>
+    <a href="#cta" class="hero-cta" aria-label="無料ロードマップ作成会に申し込む"></a>
   </div>
 
   <!-- ============ 中央800px帯のメイン部分 ============ -->
