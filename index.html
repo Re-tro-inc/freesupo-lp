@@ -1,330 +1,100 @@
 <!DOCTYPE html>
-<!--
-  ============================================================
-  フリサポ（freesupo）公式LP  ※第2版：ドライブの画像をそのまま挿入
-  ・ドライブの完成デザイン画像9枚を、中央寄せ1カラム(最大800px)で配置
-  ・PCでは中央にまとまり、スマホでは画面幅ぴったりで崩れない設計
-  ・画像が無いセクション（SUPPORT/COACH/FAQ/最終CTA）は「仮」でHTML作成
-  ・画像は images/ フォルダに保存済み
-  ============================================================
--->
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>フリサポ｜副業・フリーランスを目指す方の完全伴走型スクール</title>
-  <meta name="description" content="フリサポは、副業・フリーランスを目指す方のための完全伴走型スクールです。SNS運用・動画編集・生成AI活用・物販から、あなたに合ったスキルを個別に伴走。累計支援者1000名以上。LINEで無料相談受付中。">
-
-  <!-- ファビコン（サイトのアイコン） -->
+  <title>フリサポ｜自分に合ったスキルから、新しい働き方へ。</title>
+  <meta name="description" content="フリサポは、副業・フリーランスを目指す方の完全伴走型スクール。SNS運用・動画編集・生成AI活用・物販から、スキル選び、学習・実践まで個別にサポート。無料ロードマップ作成会を受付中。">
   <link rel="icon" href="images/favicon.png" type="image/png">
-  <link rel="icon" href="images/favicon-512.png" sizes="512x512" type="image/png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-  <!-- 検索・SNS共有用（OGP） -->
   <link rel="canonical" href="https://freesupo.re-tro.net/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="フリサポ">
-  <meta property="og:title" content="フリサポ｜副業・フリーランスを目指す方の完全伴走型スクール">
-  <meta property="og:description" content="フリサポは、副業・フリーランスを目指す方のための完全伴走型スクールです。SNS運用・動画編集・生成AI活用・物販から、あなたに合ったスキルを個別に伴走。累計支援者1000名以上。LINEで無料相談受付中。">
-  <meta property="og:url" content="https://freesupo.re-tro.net/">
-  <meta property="og:image" content="https://freesupo.re-tro.net/images/favicon-512.png">
-  <meta name="twitter:card" content="summary">
-
+  <meta property="og:title" content="フリサポ｜自分に合ったスキルから、新しい働き方へ。">
+  <meta property="og:description" content="スキル選びから学習・実践まで。副業・フリーランスを目指すあなたに、個別で伴走。">
+  <meta property="og:image" content="https://freesupo-lp.rkabc-0205.chatgpt.site/images/og.png">
+  <meta property="og:image:alt" content="フリサポ。自分に合ったスキルから、新しい働き方へ。">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-  <style>
-    /* ===== 色などの基本設定 ===== */
-    :root{
-      --navy:#14346b; --blue:#2f6fed; --blue-deep:#1e50c9;
-      --sky:#eaf1ff; --sky-2:#f4f8ff; --orange:#f26a2e; --orange-d:#e05a1f;
-      --ink:#2b3446; --ink-soft:#5b6472; --line:#e5eaf2;
-      --radius:16px; --shadow:0 10px 30px rgba(20,52,107,.08);
-      --colw:1200px;   /* ★中央カラムの最大幅(FVに合わせて拡大)。ヘッダーの中身も同じ幅 */
-    }
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; scroll-padding-top:72px; } /* 固定ヘッダー分だけ上に余白 */
-    body{
-      font-family:"Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;
-      color:var(--ink); line-height:1.8; background:#fff;
-      -webkit-font-smoothing:antialiased;
-    }
-    a{ color:inherit; text-decoration:none; }
-
-    /* ★セクションは全幅表示（左右の余白なし）。画像はこの中に縦に並ぶ */
-    .wrap{ max-width:none; margin:0 auto; }
-    /* 大きなセクション画像：カラム幅ぴったりに。すき間が出ないよう block 指定 */
-    .wrap > img.sec, .wrap > picture.sec{ width:100%; height:auto; display:block; }
-    .wrap > picture.sec img{ width:100%; height:auto; display:block; }  /* PC/スマホ切替用pictureの中のimg */
-
-    /* ===== ヘッダー（上に固定される本物のナビ。スマホでも崩れない） ===== */
-    header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); }
-    .nav{ max-width:none; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:70px; padding:0 28px; }
-    .logo{ display:flex; align-items:center; }
-    .logo img{ height:58px; width:auto; display:block; }   /* 切り出したフリサポのロゴ画像(大きめ) */
-    .nav__menu{ display:flex; align-items:center; gap:18px; }
-    .nav__menu a{ font-size:12px; font-weight:500; color:var(--ink); }
-    .nav__menu a small{ display:block; font-size:9px; color:var(--ink-soft); text-align:center; margin-top:2px; }
-    .nav__menu a:hover{ color:var(--blue); }
-    .nav__cta{ background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff !important; padding:9px 15px; border-radius:999px; font-weight:700 !important; box-shadow:0 6px 14px rgba(242,106,46,.3); }
-    .nav__toggle{ display:none; background:none; border:0; cursor:pointer; padding:8px; }
-    .nav__toggle span{ display:block; width:22px; height:2px; background:var(--navy); margin:5px 0; transition:.3s; }
-
-    /* ===== ヒーロー画像の「上部のナビ帯」だけをCSSで隠す =====
-       margin-top のマイナス％は画像の横幅を基準にするので、
-       どの画面幅でも同じ割合(=ナビ帯の高さ)だけキレイに隠れます */
-    /* ヒーローは .wrap の外に出して全幅(full-bleed)表示。ナビ帯は画像側で除去済み */
-    .hero-clip{ overflow:hidden; line-height:0; position:relative; }
-    .hero-clip picture{ display:block; }
-    .hero-clip img{ width:100%; height:auto; display:block; }
-    /* FV画像内のボタン位置に重ねる透明リンク（PC用の座標） */
-    .hero-cta{ position:absolute; display:block; z-index:5; cursor:pointer;
-      left:10.4%; top:82.5%; width:38%; height:14.5%; }
-
-    /* ===== 「VOICE 卒業生の声」見出し画像（小さいので中央に少し小さめで） ===== */
-    .voice-head{ display:block; width:70%; max-width:700px; height:auto; margin:10px auto 24px; } /* 上マージンを詰めて でもフリサポなら との空白を縮小 */
-
-    /* ===== 体験談カード：矢印・ドットで1枚ずつ切り替えるカルーセル ===== */
-    /* PCで横に広がりすぎないよう、カード幅に合わせて中央に寄せる */
-    .voice-carousel{ position:relative; padding:0 56px 4px; max-width:720px; margin:0 auto; }
-    .vc-viewport{ overflow:hidden; }                         /* 見える窓（1枚分） */
-    .vc-track{ display:flex; transition:transform .4s ease; } /* 中身を横にスライド */
-    .vc-slide{ flex:0 0 100%; display:flex; justify-content:center; padding:4px 6px 8px; }
-    .vc-slide img{ width:100%; max-width:460px; height:auto; display:block; border-radius:12px; }
-    /* 左右の矢印ボタン */
-    .vc-arrow{
-      position:absolute; top:44%; transform:translateY(-50%); z-index:5;
-      width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
-      background:#fff; color:var(--blue); font-size:24px; line-height:1; cursor:pointer;
-      box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center;
-    }
-    .vc-arrow:hover{ background:var(--sky); }
-    .vc-arrow:disabled{ opacity:.35; cursor:default; }
-    .vc-arrow.prev{ left:0; } .vc-arrow.next{ right:0; }
-    /* ドット（現在の位置） */
-    .vc-dots{ display:flex; gap:9px; justify-content:center; margin-top:10px; }
-    .vc-dot{ width:9px; height:9px; border-radius:50%; background:#c7d2e6; border:0; cursor:pointer; padding:0; transition:background .2s; }
-    .vc-dot.active{ background:var(--blue); }
-
-    /* ===== 仮セクション共通（画像が無い所をHTMLで作成） ===== */
-    .section{ padding:64px 20px; }
-    .section--sky{ background:var(--sky-2); }
-    .head{ text-align:center; margin-bottom:40px; }
-    .head__en{ display:block; color:var(--blue); font-weight:700; letter-spacing:.18em; font-size:13px; margin-bottom:8px; }
-    .head__jp{ font-size:clamp(22px,4vw,30px); font-weight:900; color:var(--navy); line-height:1.4; }
-    .head__lead{ margin-top:14px; color:var(--ink-soft); font-size:14px; }
-    .tag-karito{ display:inline-block; background:#ffe9d9; color:var(--orange-d); font-size:12px; font-weight:700; padding:2px 10px; border-radius:999px; margin-left:8px; vertical-align:middle; }
-
-    /* SUPPORT（仮） */
-    .support-grid{ display:grid; grid-template-columns:1fr; gap:16px; max-width:600px; margin:0 auto; }
-    .support-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow); }
-    .support-card h4{ color:var(--navy); font-size:18px; margin-bottom:8px; }
-    .support-card h4 .ac{ color:var(--blue); }
-    .support-card p{ font-size:14px; color:var(--ink-soft); }
-
-    /* COACH（仮） */
-    .coach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:720px; margin:0 auto; }
-    .coach-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; }
-    .coach-card .ph{ height:150px; background:linear-gradient(135deg,#dbe6fb,#c7d8f5); display:flex; align-items:center; justify-content:center; color:#7c93bd; font-size:12px; }
-    .coach-card .body{ padding:16px; }
-    .coach-card b{ color:var(--navy); font-size:16px; }
-    .coach-card .role{ color:var(--blue); font-size:12px; font-weight:700; margin:4px 0 8px; }
-    .coach-card p{ font-size:12px; color:var(--ink-soft); }
-
-    /* FAQ（仮） */
-    .faq{ max-width:680px; margin:0 auto; }
-    .faq-item{ background:#fff; border:1px solid var(--line); border-radius:12px; margin-bottom:12px; overflow:hidden; }
-    .faq-q{ display:flex; gap:12px; align-items:center; padding:16px 18px; cursor:pointer; font-weight:700; color:var(--navy); font-size:15px; }
-    .faq-q .qmark{ color:var(--blue); font-weight:900; }
-    .faq-q .plus{ margin-left:auto; color:var(--blue); font-size:20px; transition:transform .25s; }
-    .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
-    .faq-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; padding:0 18px; color:var(--ink-soft); font-size:14px; }
-    .faq-item.open .faq-a{ max-height:260px; padding:0 18px 18px 42px; }
-
-    /* 最終CTA */
-    .last-cta{ background:linear-gradient(135deg,#14346b,#245bbd); color:#fff; text-align:center; padding:64px 20px; }
-    .last-cta h2{ font-size:clamp(20px,4vw,30px); font-weight:900; margin-bottom:12px; }
-    .last-cta p{ opacity:.9; margin-bottom:26px; font-size:15px; }
-    .btn-cta{ display:inline-flex; align-items:center; gap:8px; background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff; font-weight:700; font-size:16px; padding:15px 30px; border-radius:999px; box-shadow:0 8px 20px rgba(242,106,46,.35); transition:transform .15s, box-shadow .15s; }
-    .btn-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(242,106,46,.45); }
-
-    footer{ background:#0f2450; color:#c7d2e6; padding:40px 20px; text-align:center; }
-    footer .fnav{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
-    footer .fnav a{ font-size:13px; } footer .fnav a:hover{ color:#fff; }
-    footer .copy{ font-size:12px; opacity:.7; }
-
-    /* ===== 画面下に追従する申し込みボタン ===== */
-    .float-cta{
-      position:fixed; z-index:50; right:20px; bottom:20px;
-      display:inline-flex; align-items:center; gap:8px;
-      background:linear-gradient(180deg,#f7793d,var(--orange)); color:#fff;
-      font-weight:700; font-size:15px; padding:14px 24px; border-radius:999px;
-      box-shadow:0 10px 26px rgba(242,106,46,.45);
-    }
-    .float-cta:hover{ filter:brightness(1.05); }
-
-    /* ===== スマホ表示のとき ===== */
-    @media (max-width:720px){
-      /* ナビはハンバーガーメニューに切り替え */
-      .nav__menu{ display:none; position:absolute; top:70px; left:0; right:0; background:#fff; flex-direction:column; gap:0; padding:8px 0; border-bottom:1px solid var(--line); box-shadow:var(--shadow); }
-      .nav__menu.open{ display:flex; }
-      .nav__menu a{ padding:12px 22px; width:100%; }
-      .nav__menu a small{ display:inline; margin-left:6px; }
-      .nav__menu .nav__cta{ margin:8px 22px; text-align:center; }
-      .nav__toggle{ display:block; }
-
-      /* スマホの縦長FVは、上部のロゴ部分（ヘッダーのロゴと重複）を隠す */
-      .hero-clip img{ margin-top:-25%; }
-      /* スマホ版FVのボタン位置に合わせて透明リンクを再配置 */
-      .hero-cta{ left:4%; top:67.5%; width:74%; height:9.5%; }
-
-      .voice-grid{ grid-template-columns:1fr; }   /* 体験談カードを縦1列に */
-      /* スマホでは矢印を消してカードを大きく（操作はスワイプ＋ドット） */
-      .voice-carousel{ padding:0 6px 4px; }
-      .vc-arrow{ display:none; }
-      .vc-slide{ padding:4px 2px 8px; }
-      .vc-slide img{ max-width:none; }
-      .coach-grid{ grid-template-columns:1fr; max-width:340px; }
-      .section{ padding:48px 16px; }
-      .voice-head{ width:78%; }
-      /* 追従ボタンは画面下いっぱいのバーに */
-      .float-cta{ right:12px; left:12px; bottom:12px; justify-content:center; font-size:16px; padding:16px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-  <!-- ============ ヘッダー（本物のナビ。PLANSは外し、CTAは統一） ============ -->
-  <header>
-    <div class="nav">
-      <a href="#top" class="logo"><img src="images/logo.png" alt="フリサポ freesupo."></a>
-      <nav class="nav__menu" id="navMenu">
-        <a href="#about">ABOUT<small>フリサポとは</small></a>
-        <a href="#voice">VOICE<small>卒業生の声</small></a>
-        <a href="#faq">FAQ<small>よくある質問</small></a>
-        <a href="https://freesupo.info/lp/shindan-men/meta/official_hp/" class="nav__cta">無料ロードマップ作成会</a>
-      </nav>
-      <button class="nav__toggle" id="navToggle" aria-label="メニュー"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-
-  <!-- ① ファーストビュー：PCは全幅表示／スマホは縦長 hero-sp.jpg に自動切替 -->
-  <div class="hero-clip" id="top">
-    <picture>
-      <source media="(max-width:720px)" srcset="images/hero-sp.jpg">
-      <img src="images/hero.jpg" alt="会社に依存しない働き方を、自分の力で。フリサポ｜完全伴走型のフリーランス育成スクール">
-    </picture>
-    <a href="https://freesupo.info/lp/shindan-men/meta/official_hp/" class="hero-cta" aria-label="無料ロードマップ作成会に申し込む"></a>
-  </div>
-
-  <!-- ============ 中央800px帯のメイン部分 ============ -->
-  <div class="wrap">
-
-    <!-- ② ABOUT フリサポとは（PC=横長 about.png ／ スマホ=縦長 about-sp.jpg を自動切替） -->
-    <picture class="sec" id="about">
-      <source media="(max-width:720px)" srcset="images/about-sp.jpg">
-      <img src="images/about.png" alt="フリサポとは｜自分らしい働き方を目指す完全伴走型のフリーランス育成スクール">
-    </picture>
-
-    <!-- ③ よくあるスクールとの違い（不安の提示） -->
-    <img class="sec" src="images/worry.png" alt="スクール選びで、こんな不安はありませんか？">
-
-    <!-- ④ フリサポなら（学べるスキル＋個別伴走） -->
-    <img class="sec" src="images/feature.png" alt="フリサポなら｜SNS運用・物販・生成AI活用・動画編集の中から、あなたに合った分野を個別に伴走">
-
-    <!-- ⑥ VOICE 見出し画像 -->
-    <img class="voice-head" src="images/voice-head.png" alt="VOICE 卒業生の声" id="voice">
-
-    <!-- ⑦ 体験談カード：横スクロールのカルーセル（1枚ずつ・矢印＆ドット付き） -->
-    <div class="voice-carousel">
-      <button class="vc-arrow prev" id="vcPrev" aria-label="前へ">‹</button>
-      <div class="vc-viewport">
-        <div class="vc-track" id="vcTrack">
-          <div class="vc-slide"><img src="images/voice-sns.png"    alt="SNS運用に挑戦したKさん（25歳）の体験談"></div>
-          <div class="vc-slide"><img src="images/voice-movie.png"  alt="動画編集に挑戦したTさん（33歳）の体験談"></div>
-          <div class="vc-slide"><img src="images/voice-ai.png"     alt="AI活用に挑戦したTさん（45歳）の体験談"></div>
-          <div class="vc-slide"><img src="images/voice-buppan.png" alt="物販に挑戦したTさん（41歳）の体験談"></div>
-        </div>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="#top" aria-label="フリサポ トップへ"><img src="images/logo.png" width="158" height="107" alt="フリサポ"><span>副業・フリーランスの<br>完全伴走型スクール</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="メニューを開く"><span></span><span></span></button>
+    <nav id="navigation" aria-label="メインナビゲーション">
+      <a href="#about">フリサポとは</a><a href="#skills">学べるスキル</a><a href="#support">サポート</a><a href="#voice">卒業生の声</a><a href="#faq">よくある質問</a>
+      <a class="button button-small" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">無料相談はこちら <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <h1 class="sr-only" id="hero-title">フリサポ｜会社に依存しない働き方を、自分の力で。</h1>
+      <picture><source media="(max-width: 700px)" srcset="images/hero-sp.jpg" width="900" height="1525"><img src="images/hero.jpg" width="1920" height="847" fetchpriority="high" alt="一人ひとりに合ったスキル選びから、学習・実践まで個別に伴走するフリーランス育成スクール。受講満足度96.8%、累計支援者数1,000名。"></picture>
+      <a class="hero-link" href="https://freesupo.info/lp/shindan-men/meta/official_hp/" aria-label="無料ロードマップ作成会に申し込む"></a>
+    </section>
+    <div class="intro-strip"><span>はじめての副業も、その先の独立も。</span><strong>あなたに合った一歩を、一緒に。</strong><a href="#about" aria-label="フリサポについて見る">↓</a></div>
+    <section class="section about" id="about"><div class="container">
+      <div class="section-heading"><p class="eyebrow">ABOUT US</p><h2>フリサポとは</h2></div>
+      <div class="about-content">
+        <div class="about-copy"><p class="lead">「何を始めるか」から、<br><em>ひとりにしない。</em></p><p>フリサポは、自分らしい働き方を目指す<br class="desktop-only">完全伴走型のフリーランス育成スクールです。</p><p>SNS運用・動画編集・生成AI活用・物販。<br>あなたの経験や興味、目標に合った分野を一緒に見つけ、学習から実践まで個別にサポートします。</p><a class="text-link" href="#support">フリサポのサポートを見る <span aria-hidden="true">→</span></a></div>
+        <div class="about-visual"><div class="source-photo photo-one"><img src="images/feature.png" width="753" height="2089" loading="lazy" alt="スマートフォンを手に笑顔で学ぶ男性"></div><p class="photo-caption">YOUR PACE. YOUR FUTURE.</p><div class="visual-note">自分に合う学びが、<br>これからの選択肢になる。</div></div>
       </div>
-      <button class="vc-arrow next" id="vcNext" aria-label="次へ">›</button>
-      <div class="vc-dots" id="vcDots"></div>
-    </div>
-
-    <!-- ⑨ FAQ 画像（よくあるご質問） -->
-    <img class="sec" id="faq" src="images/faq.png" alt="よくあるご質問｜FAQ" style="margin-top:16px;">
-
-    <!-- ⑨.5 無料相談の流れ（追加画像：FLOW／LINE友だち追加→4タイプ診断→日時選択→無料相談） -->
-    <img class="sec" id="cta" src="images/flow.png" alt="無料相談の流れ｜①LINEで友だち追加 ②4タイプ診断に回答 ③希望日時を選択 ④オンライン無料相談" style="margin-top:32px;">
-
-    <!-- ⑨.9 想い・メッセージ（追加画像：将来の働き方を見直し…）※最後に配置 -->
-    <img class="sec" src="images/message.png" alt="将来の働き方を見直し、自分に合った一歩を選べる人生へ。" style="margin-top:32px;">
-
-  </div><!-- /.wrap -->
-
-  <footer>
-    <div class="fnav">
-      <a href="https://re-tro.net/" target="_blank" rel="noopener">運営会社</a>
-      <a href="privacy.html">プライバシーポリシー</a>
-      <a href="law.html">特定商取引法に基づく表記</a>
-    </div>
-    <div class="copy">© freesupo（フリサポ） All Rights Reserved.</div>
-  </footer>
-
-  <!-- 画面下に追従する申し込みボタン -->
-  <a href="https://freesupo.info/lp/shindan-men/meta/official_hp/" class="float-cta">無料ロードマップ作成会に申し込む ›</a>
-
-  <script>
-    // スマホのハンバーガーメニュー開閉
-    const navToggle = document.getElementById('navToggle');
-    const navMenu   = document.getElementById('navMenu');
-    navToggle.addEventListener('click', ()=> navMenu.classList.toggle('open'));
-    navMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navMenu.classList.remove('open')));
-
-    // FAQの開け閉め
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      item.querySelector('.faq-q').addEventListener('click',()=>item.classList.toggle('open'));
-    });
-
-    // 卒業生の声カルーセル（矢印・ドットで1枚ずつ切り替え）
-    (function(){
-      const track = document.getElementById('vcTrack');
-      const slides = Array.from(track.children);
-      const dotsWrap = document.getElementById('vcDots');
-      const prev = document.getElementById('vcPrev');
-      const next = document.getElementById('vcNext');
-      let index = 0;
-      // ドットを人数分つくる
-      slides.forEach((_, i)=>{
-        const b = document.createElement('button');
-        b.className = 'vc-dot';
-        b.addEventListener('click', ()=> go(i));
-        dotsWrap.appendChild(b);
-      });
-      const dots = Array.from(dotsWrap.children);
-      // 指定の枚目に切り替え
-      function go(i){
-        index = Math.max(0, Math.min(slides.length-1, i));
-        track.style.transform = 'translateX(' + (-index*100) + '%)';
-        dots.forEach((d,j)=> d.classList.toggle('active', j===index));
-        prev.disabled = (index===0);
-        next.disabled = (index===slides.length-1);
-      }
-      prev.addEventListener('click', ()=> go(index-1));
-      next.addEventListener('click', ()=> go(index+1));
-      // スマホのスワイプ操作にも対応
-      let x0=null;
-      track.addEventListener('touchstart', e=>{ x0=e.touches[0].clientX; }, {passive:true});
-      track.addEventListener('touchend', e=>{
-        if(x0===null) return;
-        const dx = e.changedTouches[0].clientX - x0;
-        if(dx < -40) go(index+1); else if(dx > 40) go(index-1);
-        x0=null;
-      }, {passive:true});
-      go(0); // 初期表示
-    })();
-  </script>
-
+      <div class="about-values"><div><span>01</span><strong>自分に合うスキル選び</strong></div><div><span>02</span><strong>学習・実践まで個別伴走</strong></div><div><span>03</span><strong>生活に合った進め方</strong></div></div>
+    </div></section>
+    <section class="section worries"><div class="container">
+      <div class="section-heading"><p class="eyebrow">FIRST STEP</p><h2>始めたい。でも、<br class="mobile-only">こんな迷いはありませんか？</h2></div>
+      <div class="worry-grid"><p><span>01 /</span>情報が多すぎて、<br><strong>何を選べばいいかわからない。</strong></p><p><span>02 /</span>仕事と両立しながら、<br><strong>続けられるか不安。</strong></p><p><span>03 /</span>ひとりで勉強しても、<br><strong>仕事につながるか心配。</strong></p></div>
+      <p class="worry-answer">まずは、あなたの<em>「今」と「これから」</em>を<br class="mobile-only">整理するところから。</p>
+    </div></section>
+    <section class="section skills" id="skills"><div class="container">
+      <div class="section-heading"><p class="eyebrow">FIND YOUR SKILL</p><h2>あなたの可能性を広げる、<br class="mobile-only">4つのスキル。</h2><p>経験や興味、目標に合わせて。<br class="mobile-only">自分に合った分野から始められます。</p></div>
+      <div class="skill-tabs" aria-label="学べるスキル"><a href="#skill-sns" data-skill="sns">SNS運用</a><a href="#skill-movie" data-skill="movie">動画編集</a><a href="#skill-ai" data-skill="ai">生成AI活用</a><a href="#skill-buppan" data-skill="buppan">物販</a></div>
+      <div class="skill-panel" id="skill-sns" data-panel="sns"><div class="skill-title"><span class="skill-number">01</span><p>SOCIAL MEDIA</p><h3>SNS運用</h3></div><div class="skill-description"><h4>日々の「発信」を、<br>仕事につながるスキルへ。</h4><p>SNSへの興味をきっかけに、発信や運用について学ぶ分野。学習から実践まで、自分に合った進め方を一緒に整理します。</p><a class="text-link" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">自分に合うスキルを相談する <span aria-hidden="true">→</span></a></div></div>
+      <div class="skill-panel" id="skill-movie" data-panel="movie"><div class="skill-title"><span class="skill-number">02</span><p>VIDEO EDITING</p><h3>動画編集</h3></div><div class="skill-description"><h4>見る楽しさから、<br>つくる楽しさへ。</h4><p>動画づくりに興味がある方へ。動画編集のスキルを学び、実際に手を動かす経験を重ねながら、これからの働き方を考えます。</p><a class="text-link" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">自分に合うスキルを相談する <span aria-hidden="true">→</span></a></div></div>
+      <div class="skill-panel" id="skill-ai" data-panel="ai"><div class="skill-title"><span class="skill-number">03</span><p>GENERATIVE AI</p><h3>生成AI活用</h3></div><div class="skill-description"><h4>新しい技術を、<br>自分の仕事に活かす力へ。</h4><p>生成AIを活用するスキルを学ぶ分野。新しいツールに関心がある方も、初めて触れる方も、目標に合わせて一歩ずつ取り組みます。</p><a class="text-link" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">自分に合うスキルを相談する <span aria-hidden="true">→</span></a></div></div>
+      <div class="skill-panel" id="skill-buppan" data-panel="buppan"><div class="skill-title"><span class="skill-number">04</span><p>ONLINE COMMERCE</p><h3>物販</h3></div><div class="skill-description"><h4>ものを届ける経験を、<br>新しい働き方のきっかけに。</h4><p>物販に関心がある方へ。経験や生活リズムに合わせて、学習と実践の進め方を整理し、自分に合った取り組み方を見つけます。</p><a class="text-link" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">自分に合うスキルを相談する <span aria-hidden="true">→</span></a></div></div>
+      <p class="skill-footnote">学習内容や受講プランの詳細は、無料ロードマップ作成会でご案内します。</p>
+    </div></section>
+    <section class="section support" id="support"><div class="container">
+      <div class="section-heading"><p class="eyebrow">WITH YOU, ALL THE WAY</p><h2>学んで終わらない。<br><em>その先まで、一緒に。</em></h2><p>フリサポが大切にする、4つのサポート。</p></div>
+      <div class="support-grid">
+        <article class="support-item"><div class="source-photo photo-one"><img src="images/feature.png" width="753" height="2089" loading="lazy" alt="自分に合った学びを見つける男性"></div><div class="support-title"><span>01</span><h3>自分に合った分野から<br>始められる</h3></div><p>流行だけで選ばず、経験や興味、目標に合わせて分野をご提案。自分に合った選択肢と進め方を整理してからスタートできます。</p></article>
+        <article class="support-item"><div class="source-photo photo-two"><img src="images/feature.png" width="753" height="2089" loading="lazy" alt="パソコンに向かって学習する女性"></div><div class="support-title"><span>02</span><h3>学習から実践まで<br>個別に伴走</h3></div><p>知識やスキルの習得から、実際に手を動かす段階まで。進捗やつまずきに合わせて、次にやることを一緒に整理します。</p></article>
+        <article class="support-item"><div class="source-photo photo-three"><img src="images/feature.png" width="753" height="2089" loading="lazy" alt="実践経験をもとに学習をサポートする講師のイメージ"></div><div class="support-title"><span>03</span><h3>実践経験を持つ講師が<br>サポート</h3></div><p>各分野で実践経験を持つ講師がサポート。現場で役立つ考え方や進め方を、あなたの目標に合わせて具体的にお伝えします。</p></article>
+        <article class="support-item"><div class="source-photo photo-four"><img src="images/feature.png" width="753" height="2089" loading="lazy" alt="パソコンを開き、学びを共有する二人"></div><div class="support-title"><span>04</span><h3>同じ目標を持つ仲間と<br>つながれる</h3></div><p>受講生同士で相談・交流できるコミュニティ。悩みや学びを共有し、仲間から刺激を受けながら取り組めます。</p></article>
+      </div>
+    </div></section>
+    <section class="consult-band"><div class="container consult-inner"><div><p>どのスキルが自分に合うか、まだわからなくても大丈夫。</p><h2>まずは、これからの働き方を話してみませんか？</h2></div><a class="button" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">無料で相談する <span aria-hidden="true">→</span></a></div></section>
+    <section class="section voice" id="voice"><div class="container">
+      <div class="section-heading heading-row"><div><p class="eyebrow">REAL STORIES</p><h2>一歩踏み出した、<br>卒業生の声。</h2></div><div class="carousel-controls"><button class="arrow-button" id="voice-prev" aria-label="前の体験談" aria-controls="voice-track">←</button><button class="arrow-button" id="voice-next" aria-label="次の体験談" aria-controls="voice-track">→</button></div></div>
+      <div class="voice-track" id="voice-track" tabindex="0" aria-label="卒業生4名の体験談">
+        <article class="voice-card"><h3><span>01 / SNS運用</span>Kさん・25歳</h3><img src="images/voice-sns.png" width="520" height="710" loading="lazy" alt="Kさんの体験談。仕事に追われていた営業職からSNS運用を学び、企業の運用を任されるように。経験や生活リズムを整理し、相談しながら投稿と改善を続けています。"></article>
+        <article class="voice-card"><h3><span>02 / 動画編集</span>Tさん・33歳</h3><img src="images/voice-movie.png" width="520" height="710" loading="lazy" alt="動画編集に挑戦したTさん、33歳の体験談"></article>
+        <article class="voice-card"><h3><span>03 / 生成AI活用</span>Tさん・45歳</h3><img src="images/voice-ai.png" width="520" height="710" loading="lazy" alt="生成AI活用に挑戦したTさん、45歳の体験談"></article>
+        <article class="voice-card"><h3><span>04 / 物販</span>Tさん・41歳</h3><img src="images/voice-buppan.png" width="520" height="710" loading="lazy" alt="物販に挑戦したTさん、41歳の体験談"></article>
+      </div><div class="voice-bottom"><p>※掲載内容は個人の体験談です。成果を保証するものではありません。</p><span id="voice-position" aria-live="polite"></span></div>
+    </div></section>
+    <section class="section flow" id="flow"><div class="container">
+      <div class="section-heading"><p class="eyebrow">HOW TO START</p><h2>無料相談までの流れ</h2><p>あなたに合った一歩を、オンラインで一緒に整理します。</p></div>
+      <ol class="flow-list"><li><span class="step">STEP <b>01</b></span><h3>LINEで友だち追加</h3><p>フリサポ公式LINEを<br>友だち追加してください。</p></li><li><span class="step">STEP <b>02</b></span><h3>4タイプ診断に回答</h3><p>お仕事や生活スタイル、<br>興味のある分野を回答。</p></li><li><span class="step">STEP <b>03</b></span><h3>希望日時を選択</h3><p>ご都合のよい日時を選び、<br>無料相談をご予約ください。</p></li><li><span class="step">STEP <b>04</b></span><h3>オンライン無料相談</h3><p>あなたに合った分野や<br>進め方を一緒に整理します。</p></li></ol>
+      <a class="button flow-button" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">無料ロードマップ作成会に申し込む <span aria-hidden="true">→</span></a>
+    </div></section>
+    <section class="section faq" id="faq"><div class="container faq-layout"><div class="section-heading"><p class="eyebrow">FAQ</p><h2>よくあるご質問</h2><p>気になることを、<br>ひとつずつ。</p></div><div class="faq-list">
+      <details open><summary>仕事が忙しくても、受講を続けられますか？</summary><p>はい。オンラインで個別に進められるため、本業や家庭の予定と両立しながら、ご自身のペースで取り組めます。無料ロードマップ作成会では、今の生活スタイルに合わせて、無理のない進め方や学習時間の作り方を一緒に整理します。</p></details>
+      <details><summary>パソコンにあまり慣れていないのですが、大丈夫ですか？</summary><p>基本的な操作を学べる内容も用意しており、未経験の方も学習を始められるようサポートしています。WebやSNSの仕事が初めての方も、段階に合わせて進められます。</p></details>
+      <details><summary>未経験や初心者でも参加できますか？資格は必要ですか？</summary><p>未経験の方もご参加いただけます。必要な知識やスキルを基礎から順番に学べるカリキュラムを用意しています。特別な資格や経験は必要ありません。</p></details>
+      <details><summary>スマートフォンやタブレットでも参加できますか？</summary><p>無料ロードマップ作成会は、スマートフォンやタブレットでもご参加いただけます。受講開始後の学習や実践には、操作のしやすさや学習効率の面からパソコンの使用をおすすめしています。</p></details>
+      <details><summary>無料相談に参加したら、入会しないといけませんか？</summary><p>いいえ。無料ロードマップ作成会は、現在の状況や悩みを整理し、フリサポの内容や進め方がご自身に合うかを確認する機会です。無理に入会をおすすめすることはありません。情報収集の場としてもご参加ください。</p></details>
+    </div></div></section>
+    <section class="section message"><div class="container message-inner"><p class="eyebrow">OUR MESSAGE</p><h2>これからの働き方を、<br>自分で選べる人生へ。</h2><p>何かを変えたい。その気持ちはあるのに、<br class="desktop-only">選択肢が多すぎて、一歩が踏み出せない。</p><p>そんなときこそ、自分の経験や生活スタイル、<br class="desktop-only">目標に合った進め方を整理することから。</p><p>フリサポは、スキル選びから学習・実践まで、<br class="desktop-only">あなたの一歩に寄り添います。</p><img src="images/logo.png" width="158" height="107" loading="lazy" alt="フリサポ"></div></section>
+    <section class="final-cta" id="consultation"><div class="container"><p class="eyebrow">LET'S TAKE THE FIRST STEP</p><h2>あなたに合った始め方を、<br>一緒に見つけよう。</h2><p>まだ、やりたいことが決まっていなくても大丈夫。<br>まずは無料ロードマップ作成会へ。</p><a class="button" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">無料ロードマップ作成会に申し込む <span aria-hidden="true">→</span></a><small>オンラインで参加可能 / 相談無料</small></div></section>
+  </main>
+  <footer><div class="container footer-inner"><a class="brand footer-brand" href="#top"><img src="images/logo.png" width="158" height="107" loading="lazy" alt="フリサポ"></a><nav aria-label="運営情報"><a href="https://re-tro.net/" target="_blank" rel="noopener noreferrer">運営会社 ↗</a><a href="privacy.html">プライバシーポリシー</a><a href="law.html">特定商取引法に基づく表記</a></nav><small>© freesupo. All Rights Reserved.</small></div></footer>
+  <div class="mobile-cta"><span>自分に合った一歩がわかる</span><a class="button" href="https://freesupo.info/lp/shindan-men/meta/official_hp/">無料ロードマップ作成会 <span aria-hidden="true">→</span></a></div>
 </body>
 </html>
