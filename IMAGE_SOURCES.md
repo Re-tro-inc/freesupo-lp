@@ -1,5 +1,13 @@
 # Image quality update
 
+## Official browser icon (2026-09-05)
+
+Verified `images/logo-hq.png` against the downloaded original from
+https://drive.google.com/file/d/1fDY2vLQAyoaC17UEgNVUum_LkJUoCGw2/view.
+Both files have SHA-256 `bba4afa1399505e1295227de98182d31b8edc1f32f8a3e28209fedd51fc2c557`.
+The unchanged 1254 x 1254 PNG is used for the favicon and Apple touch icon,
+as well as the existing page logos. No AI transformation was applied.
+
 Original composite images remain unchanged in images/_original/.
 
 ## Original files restored
