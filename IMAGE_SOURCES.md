@@ -1,5 +1,15 @@
 # Image quality update
 
+## Delivery optimization (2026-09-05)
+
+The 11 high-resolution content PNGs now have same-dimension WebP delivery copies.
+Hero quality: 90; testimonial quality: 92; standalone photo quality: 85.
+Combined content image size: 15,168,166 bytes to 1,428,178 bytes (91% reduction).
+Original PNG files remain unchanged. No generative edits were used.
+The verified official logo now has derived 256px page, 48px favicon and 180px
+Apple touch PNG copies. These replace the full-size icon references described below.
+Conversions used the existing local Sharp installation; no production dependency was added.
+
 ## Official browser icon (2026-09-05)
 
 Verified `images/logo-hq.png` against the downloaded original from
